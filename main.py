@@ -8,7 +8,7 @@ from tensorflow.keras.applications.resnet50 import ResNet50, decode_predictions
 # to retrieve and send back data
 from flask import request
 from flask import jsonify
-from flask import Flask
+from flask import Flask, render_template
 
 # create a variable named app
 app = Flask(__name__) 
@@ -39,6 +39,11 @@ def preprocess(decoded):
 model = get_model()
   
 # function predict is called at each request  
+
+@app.route('/')
+def index():
+    return render_template('app.html')
+
 @app.route("/predict", methods=["POST"])
 def predict():
 
